@@ -1,7 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { computeBlackProb, Variables } from "../utils";
-import Image from "next/image";
 import Sharebar from "../components/Sharebar";
 
 function ResultPage() {
@@ -22,7 +21,7 @@ function ResultPage() {
     <div className="flex flex-col w-screen min-h-screen bg-black text-white justify-center items-center gap-4 pt-12">
       <p>その会社…</p>
       <div className="flex flex-wrap items-center gap-8 w-full justify-center">
-        <Image
+        <img
           src={data.src}
           alt="イメージ"
           width={imgWidth * imgRatio}
