@@ -7,7 +7,7 @@ function Checkbox(
   const { label } = props;
   return (
     <div className="flex">
-      <input {...props} ref={ref} type="checkbox" id={label} />
+      <input {...props} ref={ref} type="checkbox" id={label} value="1" />
       <label htmlFor={label}>{label}</label>
     </div>
   );
