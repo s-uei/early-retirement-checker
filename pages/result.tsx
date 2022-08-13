@@ -50,13 +50,5 @@ function ResultPage() {
     </div>
   );
 }
-/**isMan?: string;
-  age?: string;
-  isDifficult?: string;
-  highGradeRate?: string;
-  isTop?: boolean;
-  industry?: Industry;
-  scale?: Scale;
-  jobsToApplicantsRatio?: string; */
 
 export default ResultPage;
