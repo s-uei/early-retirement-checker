@@ -16,8 +16,41 @@ function HomePage() {
         <p>未完成です。</p>
       </Hero>
       <Container>
-        <form action="/result" method="GET">
-          <h2>あなたの情報を教えてください。</h2>
+        <form
+          className="flex flex-col items-center w-full"
+          action="/result"
+          method="GET"
+        >
+          <h2 className="my-8 text-2xl">あなたの情報を教えてください。</h2>
+          <fieldset className="bg-black flex items-center justify-between w-full text-white p-4 rounded">
+            <legend className="bg-black px-4 text-xl rounded">
+              Q1.男性ですか？
+            </legend>
+
+            <div>
+              <input
+                className="rounded-none"
+                type="radio"
+                id="huey"
+                name="drone"
+                value="huey"
+              />
+              <label htmlFor="huey">Huey</label>
+            </div>
+
+            <div>
+              <input type="radio" id="dewey" name="drone" value="dewey" />
+              <label htmlFor="dewey">Dewey</label>
+            </div>
+
+            <div>
+              <input type="radio" id="louie" name="drone" value="louie" />
+              <label htmlFor="louie">Louie</label>
+            </div>
+          </fieldset>
+          <div className="flex">
+            <input type="checkbox" name="" id="" />
+          </div>
           <Checkbox {...register("isMan")} label="男性" />
           <NumberInput
             {...register("age")}
