@@ -8,14 +8,16 @@ import RadioButton from "../components/RadioButton";
 import { Variables, industries, scales } from "../utils";
 
 function HomePage() {
-  const { register, handleSubmit, watch, formState } = useForm<Variables>();
+  const { register } = useForm<Variables>();
   return (
     <>
       <Hero>
-        <h1>ブラック企業チェック</h1>
+        <h1 className="text-4xl mb-4">早期離職判定期</h1>
+        <p>未完成です。</p>
       </Hero>
       <Container>
         <form action="/result" method="GET">
+          <h2>あなたの情報を教えてください。</h2>
           <Checkbox {...register("isMan")} label="男性" />
           <NumberInput
             {...register("age")}
