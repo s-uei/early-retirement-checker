@@ -12,7 +12,8 @@ function HomePage() {
   return (
     <>
       <Hero>
-        <h1>ブラック企業チェック</h1>
+        <h1>早期退職判定</h1>
+        <p>※開発中です</p>
       </Hero>
       <Container>
         <form action="/result" method="GET">
