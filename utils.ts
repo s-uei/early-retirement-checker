@@ -1,3 +1,7 @@
+import NormalDistribution from "normal-distribution";
+
+const standardNormalDistribution = new NormalDistribution();
+
 export const industries = [
   "製造業・建設業",
   "商社・卸売",
@@ -34,6 +38,17 @@ export type Variables = {
   industry?: Industry;
   scale?: Scale;
   jobsToApplicantsRatio?: string;
+};
+
+export type NumeralVariables = {
+  isMan: number;
+  age: number;
+  isDifficult: number;
+  highGradeRate: number;
+  isTop: number;
+  industry: Industry;
+  scale: Scale;
+  jobsToApplicantsRatio: number;
 };
 
 function getIndustryRate(i?: Industry): number {
@@ -84,15 +99,38 @@ function getScaleRate(s?: Scale): number {
   return 0;
 }
 
-export function computeBlackProb(v: Variables): number {
-  return (
-    Number(v.isMan ?? 0) * -0.018 +
-    Number(v.age ?? 0) * -0.005 +
-    Number(v.isDifficult ?? 0) * -0.06 +
-    Number(v.highGradeRate ?? 0) * 0.006 +
-    Number(v.isTop ?? 0) * -0.04 +
+export function convertNumeral(v: Variables): NumeralVariables | undefined {
+  return undefined;
+}
+
+function isUndefinedAnyitem(...v: any[]) {
+  if (v.find((el) => el === undefined)) return true;
+  return false;
+}
+
+export function computeProb(v: Variables): number | undefined {
+  if (
+    isUndefinedAnyitem(
+      v.isMan,
+      v.age,
+      v.isDifficult,
+      v.highGradeRate,
+      v.isTop,
+      v.industry,
+      v.scale,
+      v.jobsToApplicantsRatio
+    )
+  ) {
+    return undefined;
+  }
+  const x =
+    Number(v.isMan) * -0.018 +
+    Number(v.age) * -0.005 +
+    Number(v.isDifficult) * -0.06 +
+    (Number(v.highGradeRate) / 100) * 0.006 +
+    Number(v.isTop) * -0.04 +
     getIndustryRate(v.industry) +
     getScaleRate(v.scale) +
-    Number(v.jobsToApplicantsRatio ?? 0) * 0.054
-  );
+    Number(v.jobsToApplicantsRatio) * 0.054;
+  return standardNormalDistribution.cdf(x);
 }

@@ -6,48 +6,63 @@ import Checkbox from "../components/Checkbox";
 import NumberInput from "../components/NumberInput";
 import RadioButton from "../components/RadioButton";
 import { Variables, industries, scales } from "../utils";
+import Question from "../components/Question";
+import Slider from "../components/Slider";
 
 function HomePage() {
   const { register } = useForm<Variables>();
   return (
     <>
       <Hero>
-        <h1 className="text-4xl mb-4">早期離職判定期</h1>
+        <h1 className="text-4xl">３年以内離職判定</h1>
         <p>未完成です。</p>
       </Hero>
       <Container>
         <form
-          className="flex flex-col items-center w-full"
+          className="flex flex-col items-center w-full gap-12 py-8"
           action="/result"
           method="GET"
         >
-          <h2 className="my-8 text-2xl">あなたの情報を教えてください。</h2>
-          <fieldset className="bg-black flex items-center justify-between w-full text-white p-4 rounded">
-            <legend className="bg-black px-4 text-xl rounded">
-              Q1.男性ですか？
-            </legend>
+          <h2 className="text-2xl">あなたの情報を教えてください。</h2>
+          <Question caption="男性ですか？">
+            <RadioButton {...register("isMan")} label="はい" value={1} />
+            <RadioButton {...register("isMan")} label="いいえ" value={0} />
+          </Question>
 
-            <div>
-              <input
-                className="rounded-none"
-                type="radio"
-                id="huey"
-                name="drone"
-                value="huey"
-              />
-              <label htmlFor="huey">Huey</label>
-            </div>
+          <Question caption="難関大学に進学していますか？">
+            <RadioButton {...register("isDifficult")} label="はい" value={1} />
+            <RadioButton
+              {...register("isDifficult")}
+              label="いいえ"
+              value={0}
+            />
+          </Question>
 
-            <div>
-              <input type="radio" id="dewey" name="drone" value="dewey" />
-              <label htmlFor="dewey">Dewey</label>
-            </div>
+          <Question caption="年齢を入力してください">
+            <Slider {...register("age")} min={0} max={100} defaultValue={22} />
+          </Question>
 
-            <div>
-              <input type="radio" id="louie" name="drone" value="louie" />
-              <label htmlFor="louie">Louie</label>
-            </div>
-          </fieldset>
+          <Question caption="成績の中で優の割合を入力してください">
+            <RadioButton {...register("isMan")} label="はい" value={1} />
+            <RadioButton {...register("isMan")} label="いいえ" value={0} />
+          </Question>
+
+          <h2 className="text-2xl">就職先の情報を教えてください。</h2>
+          <Question caption="第１志望ですか">
+            <RadioButton {...register("isMan")} label="はい" value={1} />
+            <RadioButton {...register("isMan")} label="いいえ" value={0} />
+          </Question>
+
+          <Question caption="どの業界ですか">
+            <RadioButton {...register("isMan")} label="はい" value={1} />
+            <RadioButton {...register("isMan")} label="いいえ" value={0} />
+          </Question>
+
+          <Question caption="第１志望ですか">
+            <RadioButton {...register("isMan")} label="はい" value={1} />
+            <RadioButton {...register("isMan")} label="いいえ" value={0} />
+          </Question>
+
           <div className="flex">
             <input type="checkbox" name="" id="" />
           </div>
