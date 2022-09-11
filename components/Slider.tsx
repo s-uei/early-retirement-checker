@@ -14,6 +14,13 @@ function Slider(
   delete p.unit;
   return (
     <div className="flex flex-col justify-end flex-1 relative h-12">
+      <style jsx>{`
+        input[type="range"] {
+        }
+        input[type="range"]::-webkit-slider-thumb {
+          background-color: green;
+        }
+      `}</style>
       <div
         className="absolute top-0 bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
         style={{ left: value + "%", transform: "translate(-50%)" }}
