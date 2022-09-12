@@ -1,12 +1,12 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { computeBlackProb, Variables } from "../utils";
+import { computeProb, Variables } from "../utils";
 import Sharebar from "../components/Sharebar";
 
 function ResultPage() {
   const router = useRouter();
   const v = router.query as Variables;
-  const p = computeBlackProb(v);
+  const p = computeProb(v);
   const data: { text: string; src: string; color: string } = isNaN(p)
     ? { text: "測定不能", src: "/img/nan.jpg", color: "text-gray-500" }
     : p > 0.4
@@ -38,9 +38,9 @@ function ResultPage() {
 
           <p>男性:{v.isMan === "1" ? "はい" : "いいえ"}</p>
           <p>難関大学:{v.isDifficult === "1" ? "はい" : "いいえ"}</p>
+          <p>年齢:{v.age}</p>
           <p>成績の優の割合:{v.highGradeRate}</p>
           <p>第1志望:{v.isTop === "1" ? "はい" : "いいえ"}</p>
-          <p>成績の優の割合：{v.highGradeRate}</p>
           <p>産業:{v.industry}</p>
           <p>企業規模:{v.scale}</p>
           <p>都道府県別有効求人倍率:{v.jobsToApplicantsRatio}</p>

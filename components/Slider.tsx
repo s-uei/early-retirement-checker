@@ -13,20 +13,23 @@ function Slider(
   const p = { ...props };
   delete p.unit;
   return (
-    <div className="flex flex-col justify-end flex-1 relative h-12">
-      <style jsx>{`
-        input[type="range"] {
-        }
-        input[type="range"]::-webkit-slider-thumb {
-          background-color: green;
-        }
-      `}</style>
-      <div
-        className="absolute top-0 bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
-        style={{ left: value + "%", transform: "translate(-50%)" }}
-      >
-        {value}
+    <div className="flex flex-col justify-end w-full h-12">
+      <div className="flex flex-1">
+        <div className="w-3"></div>
+        <div className="flex-1 relative">
+          <div
+            className="absolute top-0 bg-white text-black w-8 h-8 flex justify-center items-center rounded-full select-none text-xs"
+            style={{
+              left: ((value - min) / max) * 100 + "%",
+              transform: "translate(-50%)",
+            }}
+          >
+            {value + unit}
+          </div>
+        </div>
+        <div className="w-3"></div>
       </div>
+
       <input
         {...p}
         onChange={(e) => {
@@ -35,7 +38,7 @@ function Slider(
         }}
         ref={ref}
         type="range"
-        className="w-full"
+        className="input-range"
       />
     </div>
   );

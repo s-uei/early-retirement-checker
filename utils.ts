@@ -40,17 +40,6 @@ export type Variables = {
   jobsToApplicantsRatio?: string;
 };
 
-export type NumeralVariables = {
-  isMan: number;
-  age: number;
-  isDifficult: number;
-  highGradeRate: number;
-  isTop: number;
-  industry: Industry;
-  scale: Scale;
-  jobsToApplicantsRatio: number;
-};
-
 function getIndustryRate(i?: Industry): number {
   switch (i) {
     case "製造業・建設業":
@@ -99,30 +88,7 @@ function getScaleRate(s?: Scale): number {
   return 0;
 }
 
-export function convertNumeral(v: Variables): NumeralVariables | undefined {
-  return undefined;
-}
-
-function isUndefinedAnyitem(...v: any[]) {
-  if (v.find((el) => el === undefined)) return true;
-  return false;
-}
-
-export function computeProb(v: Variables): number | undefined {
-  if (
-    isUndefinedAnyitem(
-      v.isMan,
-      v.age,
-      v.isDifficult,
-      v.highGradeRate,
-      v.isTop,
-      v.industry,
-      v.scale,
-      v.jobsToApplicantsRatio
-    )
-  ) {
-    return undefined;
-  }
+export function computeProb(v: Variables): number {
   const x =
     Number(v.isMan) * -0.018 +
     Number(v.age) * -0.005 +

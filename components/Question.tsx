@@ -10,7 +10,7 @@ function Question(props: {
   return (
     <fieldset
       className={clsx(
-        "bg-black flex items-center justify-between w-full text-white p-4 rounded",
+        "bg-black flex items-center justify-between w-full text-white p-4 rounded flex-wrap",
         {
           "border-red-500": isInvalid,
         }
