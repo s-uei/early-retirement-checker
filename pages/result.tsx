@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useRouter } from "next/router";
-import { computeBlackProb, Variables } from "../utils";
+import { computeProb, Variables } from "../utils";
 import Sharebar from "../components/Sharebar";
+import clsx from "clsx";
 
 function ResultPage() {
+  const [isComputing, finishComputing] = useReducer((b) => false, true);
   const router = useRouter();
   const v = router.query as Variables;
-  const p = computeBlackProb(v);
+  const p = computeProb(v);
   const data: { text: string; src: string; color: string } = isNaN(p)
     ? { text: "測定不能", src: "/img/nan.jpg", color: "text-gray-500" }
     : p > 0.4
@@ -25,10 +27,28 @@ function ResultPage() {
   const imgWidth = 800;
   const imgHeight = 533;
   const imgRatio = 0.5;
+  useEffect(() => {
+    finishComputing();
+  });
+  if (isNaN(p) && router.isReady)
+    return (
+      <div className="flex w-screen h-screen justify-center items-center">
+        計算できませんでした。
+      </div>
+    );
   return (
-    <div className="flex flex-col w-screen min-h-screen bg-black text-white justify-center items-center gap-4 pt-12">
+    <div
+      className={clsx(
+        "flex flex-col w-screen min-h-screen bg-black text-white justify-center items-center gap-4 pt-12"
+      )}
+    >
       <p>あなたの早期離職確率は…</p>
-      <div className="flex flex-wrap items-center gap-8 w-full justify-center">
+      <div
+        className={clsx(
+          "flex flex-wrap items-center gap-8 w-full justify-center transition-all delay-500 duration-500",
+          { "opacity-0": isComputing }
+        )}
+      >
         <img
           src={data.src}
           alt="イメージ"
@@ -45,9 +65,9 @@ function ResultPage() {
 
           <p>男性:{v.isMan === "1" ? "はい" : "いいえ"}</p>
           <p>難関大学:{v.isDifficult === "1" ? "はい" : "いいえ"}</p>
+          <p>年齢:{v.age}</p>
           <p>成績の優の割合:{v.highGradeRate}</p>
           <p>第1志望:{v.isTop === "1" ? "はい" : "いいえ"}</p>
-          <p>成績の優の割合：{v.highGradeRate}</p>
           <p>産業:{v.industry}</p>
           <p>企業規模:{v.scale}</p>
           <p>都道府県別有効求人倍率:{v.jobsToApplicantsRatio}</p>
