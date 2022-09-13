@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useRouter } from "next/router";
 import { computeProb, Variables } from "../utils";
 import Sharebar from "../components/Sharebar";
+import clsx from "clsx";
 
 function ResultPage() {
+  const [isComputing, finishComputing] = useReducer((b) => false, true);
   const router = useRouter();
   const v = router.query as Variables;
   const p = computeProb(v);
@@ -17,10 +19,28 @@ function ResultPage() {
   const imgWidth = 800;
   const imgHeight = 533;
   const imgRatio = 0.5;
+  useEffect(() => {
+    finishComputing();
+  });
+  if (isNaN(p) && router.isReady)
+    return (
+      <div className="flex w-screen h-screen justify-center items-center">
+        計算できませんでした。
+      </div>
+    );
   return (
-    <div className="flex flex-col w-screen min-h-screen bg-black text-white justify-center items-center gap-4 pt-12">
+    <div
+      className={clsx(
+        "flex flex-col w-screen min-h-screen bg-black text-white justify-center items-center gap-4 pt-12"
+      )}
+    >
       <p>その会社…</p>
-      <div className="flex flex-wrap items-center gap-8 w-full justify-center">
+      <div
+        className={clsx(
+          "flex flex-wrap items-center gap-8 w-full justify-center transition-all delay-500 duration-500",
+          { "opacity-0": isComputing }
+        )}
+      >
         <img
           src={data.src}
           alt="イメージ"

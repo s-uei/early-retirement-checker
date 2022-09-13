@@ -65,7 +65,7 @@ function getIndustryRate(i?: Industry): number {
     case "公務（学校・病院・福祉施設を除く）":
       return 0.176;
   }
-  return 0;
+  return NaN;
 }
 
 function getScaleRate(s?: Scale): number {
@@ -85,7 +85,7 @@ function getScaleRate(s?: Scale): number {
     case "5000人以上":
       return -0.093;
   }
-  return 0;
+  return NaN;
 }
 
 export function computeProb(v: Variables): number {
@@ -98,5 +98,5 @@ export function computeProb(v: Variables): number {
     getIndustryRate(v.industry) +
     getScaleRate(v.scale) +
     Number(v.jobsToApplicantsRatio) * 0.054;
-  return standardNormalDistribution.cdf(x);
+  return isNaN(x) ? NaN : standardNormalDistribution.cdf(x);
 }
