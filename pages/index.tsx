@@ -15,8 +15,8 @@ function HomePage() {
   return (
     <>
       <Hero>
-        <h1 className="text-4xl">３年以内離職判定</h1>
-        <p>未完成です。</p>
+        <h1>早期退職判定</h1>
+        <p>※開発中です</p>
       </Hero>
       <Container>
         <form

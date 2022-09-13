@@ -12,10 +12,18 @@ function ResultPage() {
   const data: { text: string; src: string; color: string } = isNaN(p)
     ? { text: "測定不能", src: "/img/nan.jpg", color: "text-gray-500" }
     : p > 0.4
-    ? { text: "ブラックかも…", src: "/img/black.jpg", color: "text-red-500" }
+    ? {
+        text: "転職準備",
+        src: "/img/black.jpg",
+        color: "text-red-500",
+      }
     : p > 0.1
-    ? { text: "グレー企業？", src: "/img/gray.jpg", color: "text-yellow-500" }
-    : { text: "ホワイト企業！", src: "/img/white.jpg", color: "text-white" };
+    ? {
+        text: "あなた次第",
+        src: "/img/gray.jpg",
+        color: "text-yellow-500",
+      }
+    : { text: "安心せずに", src: "/img/white.jpg", color: "text-white" };
   const imgWidth = 800;
   const imgHeight = 533;
   const imgRatio = 0.5;
@@ -34,7 +42,7 @@ function ResultPage() {
         "flex flex-col w-screen min-h-screen bg-black text-white justify-center items-center gap-4 pt-12"
       )}
     >
-      <p>その会社…</p>
+      <p>あなたの早期離職確率は…</p>
       <div
         className={clsx(
           "flex flex-wrap items-center gap-8 w-full justify-center transition-all delay-500 duration-500",
@@ -49,7 +57,6 @@ function ResultPage() {
           className="rounded-full"
         />
         <div className="flex flex-col items-center">
-          <p>ブラック度</p>
           <p>
             <span className="text-6xl">{Math.floor(p * 100)}</span>%
           </p>
