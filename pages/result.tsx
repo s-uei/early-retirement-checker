@@ -4,6 +4,7 @@ import { computeProb, Variables } from "../utils";
 import Sharebar from "../components/Sharebar";
 import clsx from "clsx";
 import Head from "next/head";
+import Image from "next/image";
 
 function ResultPage() {
   const [isComputing, finishComputing] = useReducer((b) => false, true);
@@ -32,7 +33,7 @@ function ResultPage() {
   useEffect(() => {
     finishComputing();
     setUrlForShare(window.location.href);
-  });
+  }, [setUrlForShare]);
   if (isNaN(p))
     return (
       <div className="flex w-screen h-screen justify-center items-center">
@@ -55,7 +56,7 @@ function ResultPage() {
           { "opacity-0": isComputing }
         )}
       >
-        <img
+        <Image
           src={data.src}
           alt="イメージ"
           width={imgWidth * imgRatio}
