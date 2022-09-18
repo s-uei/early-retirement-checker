@@ -16,11 +16,11 @@ function ResultPage() {
     ? { text: "測定不能", src: "/img/nan.jpg", color: "text-gray-500" }
     : p > 0.4
     ? {
-        text: "転職準備",
+        text: "よく考えて",
         src: "/img/black.jpg",
         color: "text-red-500",
       }
-    : p > 0.1
+    : p > 0.3
     ? {
         text: "あなた次第",
         src: "/img/gray.jpg",
