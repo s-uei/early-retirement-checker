@@ -6,6 +6,7 @@ import clsx from "clsx";
 
 function ResultPage() {
   const [isComputing, finishComputing] = useReducer((b) => false, true);
+  const [urlForShare, setUrlForShare] = useState("/");
   const router = useRouter();
   const v = router.query as Variables;
   const p = computeProb(v);
@@ -29,8 +30,9 @@ function ResultPage() {
   const imgRatio = 0.5;
   useEffect(() => {
     finishComputing();
+    setUrlForShare(window.location.href);
   });
-  if (isNaN(p) && router.isReady)
+  if (isNaN(p))
     return (
       <div className="flex w-screen h-screen justify-center items-center">
         計算できませんでした。
@@ -73,7 +75,10 @@ function ResultPage() {
           <p>都道府県別有効求人倍率:{v.jobsToApplicantsRatio}</p>
         </div>
       </div>
-      <Sharebar />
+      <Sharebar
+        url={urlForShare}
+        message={`私の早期離職確率は${Math.floor(p * 100)}%でした。`}
+      />
     </div>
   );
 }

@@ -7,13 +7,16 @@ import { Variables, industries, scales } from "../utils";
 import Question from "../components/Question";
 import Slider from "../components/Slider";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 function HomePage() {
   const { register, handleSubmit, formState } = useForm<Variables>();
-  console.log(formState);
   const router = useRouter();
   return (
     <>
+      <Head>
+        <title>早期離職判定</title>
+      </Head>
       <Hero>
         <h1>早期退職判定</h1>
         <p>※開発中です</p>
