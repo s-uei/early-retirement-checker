@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { computeProb, Variables } from "../utils";
 import Sharebar from "../components/Sharebar";
 import clsx from "clsx";
+import Head from "next/head";
 
 function ResultPage() {
   const [isComputing, finishComputing] = useReducer((b) => false, true);
@@ -44,6 +45,9 @@ function ResultPage() {
         "flex flex-col w-screen min-h-screen bg-black text-white justify-center items-center gap-4 pt-12"
       )}
     >
+      <Head>
+        <title>早期離職判定結果</title>
+      </Head>
       <p>あなたの早期離職確率は…</p>
       <div
         className={clsx(
