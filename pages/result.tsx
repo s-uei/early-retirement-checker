@@ -5,6 +5,7 @@ import Sharebar from "../components/Sharebar";
 import clsx from "clsx";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 function ResultPage() {
   const [isComputing, finishComputing] = useReducer((b) => false, true);
@@ -84,6 +85,11 @@ function ResultPage() {
         url={urlForShare}
         message={`私の早期離職確率は${Math.floor(p * 100)}%でした。`}
       />
+      <Link href="/column">
+        <a className="underline text-blue-400">
+          コラム：新規大卒就職者の3年以内離職率は約3割？
+        </a>
+      </Link>
     </div>
   );
 }

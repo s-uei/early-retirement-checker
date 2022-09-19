@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .markdown p {
+    @apply mb-8 text-sm;
+  }
+  .markdown a {
+    @apply text-blue-400 underline;
+  }
+  .markdown strong {
+    @apply text-2xl;
+  }
+  .markdown img {
+    @apply border;
+  }
+}
+
 @layer components {
   .input-range {
     @apply appearance-none cursor-pointer h-1 w-full bg-green-400 rounded;
